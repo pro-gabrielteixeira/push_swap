@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:49 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/03 21:23:09 by gateixei         ###   ########.fr       */
+/*   Updated: 2022/12/05 23:02:53 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
 
 #endif
