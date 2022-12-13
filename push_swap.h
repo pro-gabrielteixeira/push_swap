@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:49 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/10 04:07:49 by gateixei         ###   ########.fr       */
+/*   Updated: 2022/12/11 02:54:07 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@ typedef struct t_stack {
 	struct t_stack *next;
 } stack;
 
+//push_swap.c
+void condition_sort(stack** root_a, stack** root_b);
+void init_sort(stack** root_a, stack** root_b);
+
 //lst_function.c
 void ft_dealloc(stack* root);
 void ft_lstadd_front(stack** root, int value);
 void ft_lstadd_back(stack** root, int value);
+int lstlast(stack** root);
 
 //instructions.c
 void swap_element(stack** root);

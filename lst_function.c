@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:02:38 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/10 02:32:54 by gateixei         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:31:27 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ void ft_lstadd_back(stack** root, int value)
 	    new_lst->next = NULL;
 	    curr->next = new_lst;
 	}
+}
+
+int lstlast(stack** root)
+{
+	stack* curr;
+
+	curr = *root;
+	while (curr->next != NULL)
+		curr = curr->next;
+	return (curr->num);
 }

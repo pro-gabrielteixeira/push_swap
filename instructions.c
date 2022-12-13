@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:13:00 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/10 03:22:22 by gateixei         ###   ########.fr       */
+/*   Updated: 2022/12/13 20:54:20 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,24 @@ void swap_element(stack** root)
     }
 }
 
-void push_element(stack** root, stack** aux)
+void push_element(stack** root_add, stack** root_rm)
 {
     stack* curr;
+    stack* aux;
 
-    curr = *aux;
-    if(curr)
+    curr = *root_rm;
+    if(curr->next != NULL)
     {
-        ft_lstadd_front(root, curr->num);
-        *aux = curr->next;
-        free(curr);
+        aux = curr->next;
+        curr->next = (*root_add);
+        (*root_rm) = aux;
+        (*root_add) = curr;
     } 
+    else
+    {
+        ft_lstadd_front(root_rm, curr->num);
+        free(curr);
+    }
 }
 
 void shift_element(stack** root)
@@ -45,9 +52,10 @@ void shift_element(stack** root)
     stack* curr;
 
     curr = *root;
-    ft_lstadd_back(root, curr->num);
-    *root = curr->next;
-    free(curr);
+    while (curr->next != NULL)
+        curr = curr->next;
+    curr->next = (*root);
+    curr->next->next = NULL;
 }
 
 void reverse_shift(stack** root)
