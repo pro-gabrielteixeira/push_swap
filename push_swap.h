@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:49 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/11 02:54:07 by gateixei         ###   ########.fr       */
+/*   Updated: 2022/12/14 00:50:38 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,8 @@ void rule_reverse_b(stack** root_b);
 
 //rules_3.c
 void rule_reverse_rrr(stack** root_a, stack** root_b);
+
+//utils.c
+int get_min(stack** root);
 
 #endif

@@ -6,11 +6,24 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:39 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/13 21:01:29 by gateixei         ###   ########.fr       */
+/*   Updated: 2022/12/14 01:47:03 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void compare_stack_a(stack** root_a, stack** root_b)
+{
+	stack*	curr_b;
+	
+	curr_b = *root_b;
+	while (curr_b->next != NULL)
+	{
+		rule_push_a(root_a, root_b);
+		curr_b = *root_b;
+	}
+	rule_push_a(root_a, root_b);
+}
 
 void compare_stack_b(stack** root_b)
 {
@@ -54,12 +67,18 @@ void condition_sort(stack** root_a, stack** root_b)
 {
 	stack* curr_a;
 	int	pivot;
+	int	last_num;
 
 	curr_a = *root_a;
-	if ((*root_a))
-		pivot = lstlast(root_a);
-	while (curr_a->num != pivot)
+	last_num = lstlast(root_a);
+	if (curr_a->next != NULL)
+		pivot = (last_num + curr_a->num + get_min(root_a))/3;
+	else
+		pivot = last_num;
+	while (curr_a->num != last_num)
 	{
+		curr_a = *root_a;
+		printf("(Inside While) Stack A: %d\n Pivot: %d\n", curr_a->num, pivot);
 		if (curr_a->num > pivot)
 			rule_shift_a(root_a);
 		else
@@ -67,13 +86,10 @@ void condition_sort(stack** root_a, stack** root_b)
 			rule_push_b(root_a, root_b);
 			compare_stack_b(root_b);
 		}
-		// curr_a = *root_a;
-		printf("(Inside While) Stack A: %d\n", curr_a->num);
 	}
-	rule_push_b(root_a, root_b);
-	if (curr_a->next != NULL)
+	if ((*root_a)->next != NULL)
 	{
-		printf("(Inside Rec) Stack A: %d\n", curr_a->num);
+		printf("(Inside Rec) Stack A: %d\n", (*root_a)->num);
 		condition_sort(root_a, root_b);
 	}
 }
@@ -83,16 +99,17 @@ void init_sort(stack** root_a, stack** root_b)
 	stack* curr;
 
 	curr = *root_a;
-	// while (curr->next != NULL)
-	// {
-		// printf("(Inside While) Stack A: %d\n", curr->num);
-	// 	if (curr->num < curr->next->num)
-	// 		curr = curr->next;
-	// 	else {
+	while (curr->next != NULL)
+	{
+		printf("(Inside init_sort While) Stack A: %d\n", curr->num);
+		if (curr->num < curr->next->num)
+			curr = curr->next;
+		else {
 			condition_sort(root_a, root_b);
-			// curr = *root_a;
-	// 	}
-	// }
+			compare_stack_a(root_a, root_b);		
+			curr = *root_a;
+		}
+	}
 }
 
 int main(int argc,char* argv[])
@@ -117,13 +134,13 @@ int main(int argc,char* argv[])
 		printf("(Final) Stack A: %d\n", curr->num);
 		curr = curr->next;
 	}
-	// curr = stack_b;
-	// while (curr)
-	// {
-	// 	printf("(Final) Stack B: %d\n", curr->num);
-	// 	curr = curr->next;
-	// }
-	// ft_dealloc(stack_a);
-	ft_dealloc(stack_b); //Remove when finished since stack_b will be cleaned
+	curr = stack_b;
+	while (curr)
+	{
+		printf("(Final) Stack B: %d\n", curr->num);
+		curr = curr->next;
+	}
+	ft_dealloc(stack_a);
+	// ft_dealloc(stack_b); //Remove when finished since stack_b will be cleaned
 	return (0);
 }

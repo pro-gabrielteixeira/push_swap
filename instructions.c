@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:13:00 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/13 20:54:20 by gateixei         ###   ########.fr       */
+/*   Updated: 2022/12/14 01:46:04 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ void push_element(stack** root_add, stack** root_rm)
     } 
     else
     {
-        ft_lstadd_front(root_rm, curr->num);
-        free(curr);
+        ft_lstadd_front(root_add, curr->num);
+        free((*root_rm));
+        (*root_rm) = NULL;
     }
 }
 
@@ -52,10 +53,14 @@ void shift_element(stack** root)
     stack* curr;
 
     curr = *root;
-    while (curr->next != NULL)
-        curr = curr->next;
-    curr->next = (*root);
-    curr->next->next = NULL;
+    if (curr->next != NULL)
+    {
+        while (curr->next != NULL)
+            curr = curr->next;
+        curr->next = (*root);
+        (*root) = (*root)->next;
+        curr->next->next = NULL;
+    }
 }
 
 void reverse_shift(stack** root)
