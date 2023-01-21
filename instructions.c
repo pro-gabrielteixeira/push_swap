@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:13:00 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/14 01:46:04 by gateixei         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:44:05 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void swap_element(stack** root)
     {
         curr->next = aux->next;
         aux->next = *root;
-        *root = aux;   
+        *root = aux;
     }
 }
 
@@ -33,16 +33,20 @@ void push_element(stack** root_add, stack** root_rm)
     stack* aux;
 
     curr = *root_rm;
+    if (!curr)
+        return;
     if(curr->next != NULL)
     {
         aux = curr->next;
         curr->next = (*root_add);
-        (*root_rm) = aux;
         (*root_add) = curr;
+        (*root_rm) = aux;
     } 
     else
     {
         ft_lstadd_front(root_add, curr->num);
+        // curr->next = (*root_add);
+        // (*root_add) = curr;  
         free((*root_rm));
         (*root_rm) = NULL;
     }

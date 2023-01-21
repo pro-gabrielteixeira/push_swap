@@ -6,141 +6,85 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:39 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/14 01:47:03 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/01/06 23:32:20 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void compare_stack_a(stack** root_a, stack** root_b)
+void sort_large(stack** root_a, stack** root_b)
 {
-	stack*	curr_b;
+	stack*	curr;
 	
-	curr_b = *root_b;
-	while (curr_b->next != NULL)
+	curr = *root_a;
+	while (curr)
 	{
-		rule_push_a(root_a, root_b);
-		curr_b = *root_b;
+		printf("(Large) Stack A: %d\n", curr->num);
+		curr = curr->next;
 	}
-	rule_push_a(root_a, root_b);
+	curr = *root_b;
+	while (curr)
+	{
+		printf("(Large) Stack B: %d\n", curr->num);
+		curr = curr->next;
+	}
 }
 
-void compare_stack_b(stack** root_b)
+void sort_medium(stack** root_a, stack** root_b)
 {
-	stack* curr_b;
-	int		last_num;
-	int		first;
-	int		sec;
+	stack*	curr;
 	
-	
-	curr_b = *root_b;
-	if (curr_b->next == NULL)
-		return;
-	last_num = lstlast(root_b);
-	first = curr_b->num;
-	sec = curr_b->next->num;
-	if (first > sec && first > last_num && sec < last_num)
+	curr = *root_a;
+	while (curr)
 	{
-		rule_reverse_b(root_b);
-		rule_swap_b(root_b);
+		printf("(Medium) Stack A: %d\n", curr->num);
+		curr = curr->next;
 	}
-	else if (first > sec && first < last_num && sec < last_num)
-		rule_reverse_b(root_b);
-	else if (first < sec && first > last_num && sec > last_num)
-		rule_swap_b(root_b);
-	else if (first < sec && first < last_num && sec > last_num)
+	curr = *root_b;
+	while (curr)
 	{
-		rule_reverse_b(root_b);
-		rule_swap_b(root_b);
-		rule_shift_b(root_b);
-		rule_swap_b(root_b);
+		printf("(Medium) Stack B: %d\n", curr->num);
+		curr = curr->next;
 	}
-	else if (first < sec && first < last_num && sec < last_num)
-	{
-		rule_swap_b(root_b);
-		rule_reverse_b(root_b);
-	}
-	printf("(Inside compare_stack) Stack B: %d\n", curr_b->num);	
 }
 
-void condition_sort(stack** root_a, stack** root_b)
+void sort_small(stack** root_a, stack** root_b, int size)
 {
-	stack* curr_a;
-	int	pivot;
-	int	last_num;
+	// stack*	curr;
+	int		count;
 
-	curr_a = *root_a;
-	last_num = lstlast(root_a);
-	if (curr_a->next != NULL)
-		pivot = (last_num + curr_a->num + get_min(root_a))/3;
-	else
-		pivot = last_num;
-	while (curr_a->num != last_num)
+	count = 0;
+	// curr = *root_a;
+	while (count <= (size/2))
 	{
-		curr_a = *root_a;
-		printf("(Inside While) Stack A: %d\n Pivot: %d\n", curr_a->num, pivot);
-		if (curr_a->num > pivot)
-			rule_shift_a(root_a);
-		else
+		if ((*root_a)->num == get_min(root_a)) // (*root_a)->num == get_max(root_a) || 
 		{
-			rule_push_b(root_a, root_b);
-			compare_stack_b(root_b);
+			sort_stack_small_b(root_a, root_b);
+			count++;
 		}
+		else
+			rule_shift_a(root_a);
 	}
-	if ((*root_a)->next != NULL)
-	{
-		printf("(Inside Rec) Stack A: %d\n", (*root_a)->num);
-		condition_sort(root_a, root_b);
-	}
+	while ((*root_b) != NULL)
+		sort_stack_small_a(root_a, root_b);
 }
 
 void init_sort(stack** root_a, stack** root_b)
 {
 	stack* curr;
-
-	curr = *root_a;
-	while (curr->next != NULL)
-	{
-		printf("(Inside init_sort While) Stack A: %d\n", curr->num);
-		if (curr->num < curr->next->num)
-			curr = curr->next;
-		else {
-			condition_sort(root_a, root_b);
-			compare_stack_a(root_a, root_b);		
-			curr = *root_a;
-		}
-	}
-}
-
-int main(int argc,char* argv[])
-{
-	stack* stack_a;
-	stack* stack_b;
-	stack* curr;
 	int	i;
 
-	i = 1;
-	stack_a = NULL;
-	stack_b = NULL;
-	while (argv[i] != NULL && i < argc)
+	i = 0;
+	curr = *root_a;
+	while ((curr) != NULL)
 	{
-		ft_lstadd_back(&stack_a, atoi(argv[i]));
+		curr = curr->next;
 		i++;
 	}
-	init_sort(&stack_a, &stack_b);
-	curr = stack_a;
-	while (curr)
-	{
-		printf("(Final) Stack A: %d\n", curr->num);
-		curr = curr->next;
-	}
-	curr = stack_b;
-	while (curr)
-	{
-		printf("(Final) Stack B: %d\n", curr->num);
-		curr = curr->next;
-	}
-	ft_dealloc(stack_a);
-	// ft_dealloc(stack_b); //Remove when finished since stack_b will be cleaned
-	return (0);
+	if (i <= 6)
+		sort_small(root_a, root_b, i);
+	else if (i <= 249)
+		sort_medium(root_a, root_b);
+	else
+		sort_large(root_a, root_a);
 }

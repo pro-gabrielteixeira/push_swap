@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:49 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/14 00:50:38 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:42:13 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ typedef struct t_stack {
 } stack;
 
 //push_swap.c
-void condition_sort(stack** root_a, stack** root_b);
 void init_sort(stack** root_a, stack** root_b);
+void sort_small(stack** root_a, stack** root_b, int size);
+void sort_medium(stack** root_a, stack** root_b);
+void sort_large(stack** root_a, stack** root_b);
 
 //lst_function.c
 void ft_dealloc(stack* root);
@@ -58,5 +60,15 @@ void rule_reverse_rrr(stack** root_a, stack** root_b);
 
 //utils.c
 int get_min(stack** root);
+int get_max(stack** root);
+
+//ft_atoi.c
+int	ft_isdigit(int c);
+int	ft_iswhitespace(char c);
+int	ft_atoi(const char *str);
+
+//sorting_small.c
+void sort_stack_small_b(stack** root_a, stack** root_b);
+void sort_stack_small_a(stack** root_a, stack** root_b);
 
 #endif
