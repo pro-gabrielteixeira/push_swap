@@ -17,9 +17,9 @@ int get_min(stack** root)
     stack* curr;
     int i;
 
-    curr = *root;
+    curr = (*root);
     i = curr->num;
-    while (curr->next != NULL)
+    while (curr)
     {
         if(i > curr->num)
             i = curr->num;
@@ -35,7 +35,7 @@ int get_max(stack** root)
 
     curr = *root;
     i = curr->num;
-    while (curr->next != NULL)
+    while (curr)
     {
         if(i < curr->num)
             i = curr->num;

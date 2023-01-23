@@ -55,12 +55,18 @@ void sort_small(stack** root_a, stack** root_b, int size)
 
 	count = 0;
 	// curr = *root_a;
-	while (count <= (size/2))
+	while (count < (size/2))
 	{
-		if ((*root_a)->num == get_min(root_a)) // (*root_a)->num == get_max(root_a) || 
+		if ((*root_a)->num == get_min(root_a)) // (*root_a)->num == get_max(root_a) ||
 		{
 			sort_stack_small_b(root_a, root_b);
 			count++;
+			// curr = (*root_a);
+			// while (curr)
+			// {
+			// 	printf("(sort_small) Stack A: %d\n", curr->num);
+			// 	curr = curr->next;
+			// }
 		}
 		else
 			rule_shift_a(root_a);
@@ -81,7 +87,7 @@ void init_sort(stack** root_a, stack** root_b)
 		curr = curr->next;
 		i++;
 	}
-	if (i <= 6)
+	if (i <= 5)
 		sort_small(root_a, root_b, i);
 	else if (i <= 249)
 		sort_medium(root_a, root_b);
