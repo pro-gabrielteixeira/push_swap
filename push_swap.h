@@ -13,6 +13,9 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# define TRUE 1
+# define FALSE 0
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -30,7 +33,7 @@ void sort_medium(stack** root_a, stack** root_b);
 void sort_large(stack** root_a, stack** root_b);
 
 //lst_function.c
-void ft_dealloc(stack* root);
+void ft_dealloc(stack** root);
 void ft_lstadd_front(stack** root, int value);
 void ft_lstadd_back(stack** root, int value);
 int lstlast(stack** root);
@@ -69,6 +72,6 @@ int	ft_atoi(const char *str);
 
 //sorting_small.c
 void sort_stack_small_b(stack** root_a, stack** root_b);
-void sort_stack_small_a(stack** root_a, stack** root_b);
+void sort_stack_small_a(stack** root_a);
 
 #endif

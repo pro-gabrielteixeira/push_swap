@@ -12,12 +12,17 @@
 
 #include "push_swap.h"
 
-void ft_dealloc(stack* root)
+void ft_dealloc(stack** root)
 {
-	if (root != NULL)
+	stack	*curr;
+	stack	*tmp;
+
+	curr = (*root);
+	while (curr != NULL)
 	{
-		ft_dealloc(root->next);
-		free(root);
+		tmp = curr->next;
+		free(curr);
+		curr = tmp;
 	}
 }
 
