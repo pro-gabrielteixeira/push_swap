@@ -25,9 +25,9 @@ int	ft_iswhitespace(char c)
 	return ((c >= 9 && c <= 13) || c == 32);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, stack** root_a)
 {
-	int	result;
+	long int	result;
 	int	neg;
 	int	c;
 
@@ -40,9 +40,12 @@ int	ft_atoi(const char *str)
 		neg = 44 - *str++;
 	while (ft_isdigit(*str))
 	{
-		if (c++ > 18)
-			return ((neg == -1) - 1);
 		result = (*str++ - 48) + (result * 10);
+		if (c++ > 11 || result > INT_MAX || result < INT_MIN)
+		{
+			ft_dealloc(root_a);
+			ft_print_error();
+		}
 	}
-	return (result * neg);
+	return ((int)result * neg);
 }

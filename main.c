@@ -40,9 +40,8 @@ void ft_validate_repeated_numbers(stack **root_a)
 		{
 			if (icurr->num == jcurr->num)
 			{
-				write(1, "Error\n", 6);
 				ft_dealloc(root_a);
-				exit(1);
+				ft_print_error();
 			}
 			else
 				jcurr = jcurr->next;
@@ -50,14 +49,6 @@ void ft_validate_repeated_numbers(stack **root_a)
 		icurr = icurr->next;
 	}
 }
-
-// void ft_validation_big_small_numbers(char **argv)
-// {
-// 	int	i;
-// 	int j;
-
-// 	while
-// }
 
 void ft_validation_valide_char(int argc, char **argv)
 {
@@ -68,26 +59,20 @@ void ft_validation_valide_char(int argc, char **argv)
 	j = 1;
 	while (argv[i] != NULL && i < argc)
 	{
-		if (((*argv[i]) >= '0' && (*argv[i]) <= '9') || (*argv[i]) == '-' || (*argv[i]) == '+')
+		if (((*argv[i]) >= '0' && (*argv[i]) <= '9') || ((*argv[i]) == '-' && argv[i][1] != '\0') || ((*argv[i]) == '+' && argv[i][1] != '\0'))
 			{
 				while ((argv[i][j]) != '\0')
 					{
 						if ((argv[i][j]) >= '0' && (argv[i][j]) <= '9')
 							j++;
 						else
-							{
-								write(1, "Error\n", 6);
-								exit(1);
-							}
+						ft_print_error();
 					}
 				j = 1;
 				i++;
 			}
 		else
-		{
-			write(1, "Error\n", 6);
-			exit(1);
-		}
+		ft_print_error();
 	}
 }
 
@@ -95,18 +80,18 @@ int main(int argc,char* argv[])
 {
 	stack* stack_a;
 	stack* stack_b;
+	// stack* curr;
 	int	i;
 
 	i = 1;
 	stack_a = NULL;
 	stack_b = NULL;
-	if (argc <= 2)
+	if (argc < 2)
 		return (0);
 	ft_validation_valide_char(argc, argv);
-	// ft_validation_big_small_numbers(argv);
 	while (argv[i] != NULL && i < argc)
 	{
-		ft_lstadd_back(&stack_a, ft_atoi(argv[i]));
+		ft_lstadd_back(&stack_a, ft_atoi(argv[i], &stack_a));
 		i++;
 	}
 	ft_validate_repeated_numbers(&stack_a);

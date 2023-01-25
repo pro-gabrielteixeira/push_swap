@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
+# include <limits.h>
 
 typedef struct t_stack {
 	int	num;
@@ -64,11 +65,13 @@ void rule_reverse_rrr(stack** root_a, stack** root_b);
 //utils.c
 int get_min(stack** root);
 int get_max(stack** root);
+int ft_strlen(char* str);
+void ft_print_error(void);
 
 //ft_atoi.c
 int	ft_isdigit(int c);
 int	ft_iswhitespace(char c);
-int	ft_atoi(const char *str);
+int	ft_atoi(const char *str, stack** root_a);
 
 //sorting_small.c
 void sort_stack_small_b(stack** root_a, stack** root_b);

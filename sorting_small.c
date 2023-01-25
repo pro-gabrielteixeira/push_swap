@@ -33,7 +33,7 @@ void sort_stack_small_a(stack** root_a)
     last = lstlast(root_a);
     if (first != get_min(root_a))
     {
-        if (last == get_min(root_a) && first == get_max(root_a))
+        if (last == get_min(root_a) && first == get_max(root_a) && sec != last)
         {
             rule_swap_a(root_a);
             rule_reverse_a(root_a);
