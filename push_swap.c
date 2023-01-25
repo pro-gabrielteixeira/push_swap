@@ -12,45 +12,45 @@
 
 #include "push_swap.h"
 
-void sort_large(stack** root_a, stack** root_b)
+void sort_large(stack** root_a, stack** root_b, int size)
 {
-	stack*	curr;
+	int	pivot;
+	int	count;
 	
-	curr = *root_a;
-	while (curr)
+	count = 0;
+	pivot = ft_pivot(root_a);
+	while ((*root_a)->next != NULL && count < size)
 	{
-		printf("(Large) Stack A: %d\n", curr->num);
-		curr = curr->next;
-	}
-	curr = *root_b;
-	while (curr)
-	{
-		printf("(Large) Stack B: %d\n", curr->num);
-		curr = curr->next;
+		if((*root_a)->num <= pivot)
+			rule_push_b(root_a, root_b);
+		else if ((*root_a)->num > (*root_a)->next->num)
+			rule_swap_a(root_a);
+		else
+			rule_reverse_a(root_a);
+		count++;
 	}
 }
 
-void sort_medium(stack** root_a, stack** root_b)
-{
-	stack*	curr;
+// void sort_medium(stack** root_a, stack** root_b)
+// {
+// 	stack*	curr;
 	
-	curr = *root_a;
-	while (curr)
-	{
-		printf("(Medium) Stack A: %d\n", curr->num);
-		curr = curr->next;
-	}
-	curr = *root_b;
-	while (curr)
-	{
-		printf("(Medium) Stack B: %d\n", curr->num);
-		curr = curr->next;
-	}
-}
+// 	curr = *root_a;
+// 	while (curr)
+// 	{
+// 		printf("(Medium) Stack A: %d\n", curr->num);
+// 		curr = curr->next;
+// 	}
+// 	curr = *root_b;
+// 	while (curr)
+// 	{
+// 		printf("(Medium) Stack B: %d\n", curr->num);
+// 		curr = curr->next;
+// 	}
+// }
 
 void sort_small(stack** root_a, stack** root_b, int size)
 {
-	// stack*	curr;
 	int		count;
 
 	count = 0;
@@ -60,12 +60,6 @@ void sort_small(stack** root_a, stack** root_b, int size)
 		{
 			sort_stack_small_b(root_a, root_b);
 			count++;
-			// curr = (*root_a);
-			// while (curr)
-			// {
-			// 	printf("(sort_small) Stack A: %d\n", curr->num);
-			// 	curr = curr->next;
-			// }
 		}
 		else
 			rule_shift_a(root_a);
@@ -91,10 +85,10 @@ void init_sort(stack** root_a, stack** root_b)
 	}
 	if (i <= 3)
 		sort_stack_small_a(root_a);
-	else if (i <= 6)
-		sort_small(root_a, root_b, i);
-	else if (i <= 249)
-		sort_medium(root_a, root_b);
+	else if (i <= 5)
+		sort_small(root_a, root_b, i); 
+	// else if (i <= 249)
+	// 	sort_medium(root_a, root_b);
 	else
-		sort_large(root_a, root_a);
+		sort_large(root_a, root_b, i);
 }

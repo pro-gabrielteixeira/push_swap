@@ -49,3 +49,21 @@ void ft_print_error(void)
 	write(1, "Error\n", 6);
 	exit(1);
 }
+
+int ft_pivot(stack** root)
+{
+    long int    result;
+    unsigned int i;
+    stack* curr;
+
+    i = 0;
+    result = 0;
+    curr = (*root);
+    while (curr != NULL)
+    {
+        result += curr->num;
+        curr = curr->next;
+        i++;
+    }
+    return ((int)result/i);
+}

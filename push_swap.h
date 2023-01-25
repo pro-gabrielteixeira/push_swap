@@ -31,7 +31,7 @@ typedef struct t_stack {
 void init_sort(stack** root_a, stack** root_b);
 void sort_small(stack** root_a, stack** root_b, int size);
 void sort_medium(stack** root_a, stack** root_b);
-void sort_large(stack** root_a, stack** root_b);
+void sort_large(stack** root_a, stack** root_b, int size);
 
 //lst_function.c
 void ft_dealloc(stack** root);
@@ -67,6 +67,7 @@ int get_min(stack** root);
 int get_max(stack** root);
 int ft_strlen(char* str);
 void ft_print_error(void);
+int ft_pivot(stack** root);
 
 //ft_atoi.c
 int	ft_isdigit(int c);
