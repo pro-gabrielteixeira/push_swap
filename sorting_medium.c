@@ -1,69 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   sorting_medium.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 00:47:43 by gateixei          #+#    #+#             */
-/*   Updated: 2023/01/31 16:52:40 by gateixei         ###   ########.fr       */
+/*   Created: 2023/01/31 15:36:25 by gateixei          #+#    #+#             */
+/*   Updated: 2023/01/31 17:33:32 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "push_swap.h"
 
-int get_min(stack** root)
+int ft_check_small(stack** small, int i)
+{
+    stack* curr;
+    
+    curr = (*small);
+    while (curr)
+    {
+        if (curr->num == i) 
+            return FALSE;
+        curr = curr->next;
+    }
+    return TRUE;
+}
+
+void get_min_stack(stack** small, stack** root)
 {
     stack* curr;
     int i;
 
     curr = (*root);
-    i = curr->num;
+    i = get_max(root);
     while (curr)
     {
-        if(i > curr->num)
+        if(i > curr->num && ft_check_small(small, curr->num))
             i = curr->num;
         curr = curr->next;
     }
-    return (i);
+    ft_lstadd_back(small, i);
 }
 
-int get_max(stack** root)
+void ft_get_small(stack** small, stack** root_a, stack** root_b, int size)
 {
-    stack* curr;
-    int i;
-
-    curr = *root;
-    i = curr->num;
-    while (curr)
-    {
-        if(i < curr->num)
-            i = curr->num;
-        curr = curr->next;
-    }
-    return (i);
-}
-
-void ft_print_error(void)
-{
-	write(1, "Error\n", 6);
-	exit(1);
-}
-
-int ft_pivot(stack** root)
-{
-    long int    result;
-    unsigned int i;
-    stack* curr;
-
-    i = 0;
-    result = 0;
-    curr = (*root);
-    while (curr != NULL)
-    {
-        result += curr->num;
-        curr = curr->next;
-        i++;
-    }
-    return ((int)result/i);
+    while (size--)
+        get_min_stack(small, root_a);
+    if ((*root_b) != NULL)
+        lstlast(root_b); //Remove
 }

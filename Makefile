@@ -12,7 +12,7 @@
 
 NAME = push_swap
 HEADER = push_swap.h
-SRC = instructions.c rules_2.c rules.c lst_function.c push_swap.c rules_3.c utils.c main.c ft_atoi.c sorting_small.c
+SRC = instructions.c rules_2.c rules.c lst_function.c push_swap.c rules_3.c utils.c main.c ft_atoi.c sorting_small.c sorting_medium.c 
 CC = gcc
 CFLAGS = -Wextra -Wall -Werror -g -fsanitize=address -o
 
