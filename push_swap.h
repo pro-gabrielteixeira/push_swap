@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:49 by gateixei          #+#    #+#             */
-/*   Updated: 2023/01/31 17:34:08 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:52:57 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct t_stack {
 //push_swap.c
 void init_sort(stack** root_a, stack** root_b);
 void sort_small(stack** root_a, stack** root_b, int size);
-void sort_medium(stack** root_a, stack** root_b, int size);
+void sort_medium(stack** root_a, stack** root_b);
 void sort_large(stack** root_a, stack** root_b, int size);
 
 //lst_function.c
@@ -65,9 +65,9 @@ void rule_reverse_rrr(stack** root_a, stack** root_b);
 //utils.c
 int get_min(stack** root);
 int get_max(stack** root);
-int ft_strlen(char* str);
 void ft_print_error(void);
 int ft_pivot(stack** root);
+int get_size(stack** root);
 
 //ft_atoi.c
 int	ft_isdigit(int c);
@@ -81,6 +81,7 @@ void sort_stack_small_a(stack** root_a);
 //sorting_medium.c
 int ft_check_small(stack** small, int i);
 void get_min_stack(stack** small, stack** root);
-void ft_get_small(stack** small, stack** root_a, stack** root_b, int size);
+void ft_get_small(stack** small, stack** root, int size);
+void sorting_medium_b(stack** root_a, stack** root_b, stack** small_sort);
 
 #endif

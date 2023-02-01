@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 00:47:43 by gateixei          #+#    #+#             */
-/*   Updated: 2023/01/31 16:52:40 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:33:01 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,19 @@ int ft_pivot(stack** root)
         i++;
     }
     return ((int)result/i);
+}
+
+int get_size(stack** root)
+{
+	stack* curr;
+	int	i;
+
+	i = 0;
+	curr = *root;
+	while ((curr) != NULL)
+	{
+		curr = curr->next;
+		i++;
+	}
+    return (i);
 }

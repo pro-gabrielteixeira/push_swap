@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:36:25 by gateixei          #+#    #+#             */
-/*   Updated: 2023/01/31 17:33:32 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:17:50 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,17 @@ void get_min_stack(stack** small, stack** root)
     ft_lstadd_back(small, i);
 }
 
-void ft_get_small(stack** small, stack** root_a, stack** root_b, int size)
+void ft_get_small(stack** small, stack** root, int size)
 {
     while (size--)
-        get_min_stack(small, root_a);
-    if ((*root_b) != NULL)
-        lstlast(root_b); //Remove
+        get_min_stack(small, root);
+}
+
+void sorting_medium_b(stack** root_a, stack** root_b, stack** small_sort)
+{
+    rule_push_b(root_a, root_b);
+    if ((*root_b)->next == NULL)
+        return ;
+    if (!(ft_check_small(small_sort, (*root_b)->num)))
+        rule_shift_b(root_b);
 }
