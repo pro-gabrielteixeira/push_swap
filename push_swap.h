@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:49 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/01 20:52:57 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/05 22:04:31 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct t_stack {
 //push_swap.c
 void init_sort(stack** root_a, stack** root_b);
 void sort_small(stack** root_a, stack** root_b, int size);
-void sort_medium(stack** root_a, stack** root_b);
+void sort_medium(stack** root_a, stack** root_b, int size);
 void sort_large(stack** root_a, stack** root_b, int size);
 
 //lst_function.c
@@ -82,6 +82,7 @@ void sort_stack_small_a(stack** root_a);
 int ft_check_small(stack** small, int i);
 void get_min_stack(stack** small, stack** root);
 void ft_get_small(stack** small, stack** root, int size);
-void sorting_medium_b(stack** root_a, stack** root_b, stack** small_sort);
+int sorting_medium_b(stack** root_a, stack** root_b, stack** small_sort, int count);
+void sorting_medium_a(stack** root_a, stack** root_b);
 
 #endif

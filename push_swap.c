@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:39 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/01 21:25:57 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/05 23:40:16 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,40 @@ void sort_large(stack** root_a, stack** root_b, int size)
 	}
 }
 
-void sort_medium(stack** root_a, stack** root_b)
+void sort_medium(stack** root_a, stack** root_b, int size)
 {
 	stack*	small_num;
 	stack*	small_sort;
-	int		size;
 	int		count;
+	int		i;
 
-	size = get_size(root_a);
 	small_num = NULL;
 	small_sort = NULL;
-	ft_get_small(&small_num, root_a, ((size/5) + 1));
-	printf("%i\n", get_size(&small_num));
-	count = get_size(&small_num)/2;
+	ft_get_small(&small_num, root_a, size);
+	count = 0;
+	i = get_size(&small_num);
 	ft_get_small(&small_sort, &small_num, count);
-	while ((*root_a)->next != NULL && size--)
+	while ((*root_a)->next != NULL && i && get_size(root_a) > 3)
 	{
 		if(!(ft_check_small(&small_num, (*root_a)->num)))
-			sorting_medium_b(root_a, root_b, &small_sort);
+		{
+			count = sorting_medium_b(root_a, root_b, &small_sort, count);
+			i--;
+		}
 		else
 			rule_shift_a(root_a);
 	}
-	// while (count--)
-	// 	rule_reverse_b(root_b);
+	while (count--)
+		rule_reverse_b(root_b);
 	ft_dealloc(&small_num);
 	ft_dealloc(&small_sort);
-	if (get_size(root_a) > 5)
-		sort_medium(root_a, root_b);
-	// else
-	// 	while ((*root_b) != NULL)
-	// 		rule_push_a(root_a, root_b);
+	if (get_size(root_a) > 3)
+		sort_medium(root_a, root_b, size);
+	else
+	{
+		sort_stack_small_a(root_a);
+		sorting_medium_a(root_a, root_b);
+	}
 }
 
 void sort_small(stack** root_a, stack** root_b, int size)
@@ -95,7 +99,7 @@ void init_sort(stack** root_a, stack** root_b)
 	else if (i <= 5)
 		sort_small(root_a, root_b, i); 
 	else if (i <= 99)
-		sort_medium(root_a, root_b);
+		sort_medium(root_a, root_b, i/5);
 	else
 		sort_large(root_a, root_b, i);
 }

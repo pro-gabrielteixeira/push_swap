@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:36:25 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/01 21:17:50 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/05 22:36:02 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,37 @@ void ft_get_small(stack** small, stack** root, int size)
         get_min_stack(small, root);
 }
 
-void sorting_medium_b(stack** root_a, stack** root_b, stack** small_sort)
+int sorting_medium_b(stack** root_a, stack** root_b, stack** small_sort, int count)
 {
     rule_push_b(root_a, root_b);
     if ((*root_b)->next == NULL)
-        return ;
-    if (!(ft_check_small(small_sort, (*root_b)->num)))
+        return (count);
+    if ((ft_check_small(small_sort, (*root_b)->num)))
+    {
         rule_shift_b(root_b);
+        count++;
+    }
+    return (count);
+}
+
+void sorting_medium_a(stack** root_a, stack** root_b)
+{
+	while ((*root_b))
+	{
+        if ((*root_b)->next != NULL && (*root_a)->next != NULL)
+        {
+            if (((*root_a)->num > (*root_a)->next->num) && ((*root_b)->num < (*root_b)->next->num))
+                rule_swap_ss(root_a, root_b);
+            else if ((*root_b)->num < (*root_b)->next->num)
+                rule_swap_b(root_b);
+            else if ((*root_a)->num > (*root_a)->next->num)
+                rule_swap_a(root_a);
+            if ((*root_a)->num < (*root_b)->num)
+            {
+                rule_push_b(root_a, root_b);
+                rule_swap_b(root_b);
+            }
+        }
+    rule_push_a(root_a, root_b);
+    }
 }
