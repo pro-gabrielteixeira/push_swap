@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:39 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/05 23:40:16 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/07 23:37:48 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void sort_medium(stack** root_a, stack** root_b, int size)
 	ft_get_small(&small_num, root_a, size);
 	count = 0;
 	i = get_size(&small_num);
-	ft_get_small(&small_sort, &small_num, count);
-	while ((*root_a)->next != NULL && i && get_size(root_a) > 3)
+	ft_get_small(&small_sort, &small_num, 4);
+	while ((*root_a)->next != NULL && i && get_size(root_a) > 2)
 	{
 		if(!(ft_check_small(&small_num, (*root_a)->num)))
 		{
@@ -58,7 +58,7 @@ void sort_medium(stack** root_a, stack** root_b, int size)
 		rule_reverse_b(root_b);
 	ft_dealloc(&small_num);
 	ft_dealloc(&small_sort);
-	if (get_size(root_a) > 3)
+	if (get_size(root_a) > 2)
 		sort_medium(root_a, root_b, size);
 	else
 	{
@@ -98,8 +98,6 @@ void init_sort(stack** root_a, stack** root_b)
 		sort_stack_small_a(root_a);
 	else if (i <= 5)
 		sort_small(root_a, root_b, i); 
-	else if (i <= 99)
-		sort_medium(root_a, root_b, i/5);
 	else
-		sort_large(root_a, root_b, i);
+		sort_medium(root_a, root_b, 8);
 }
