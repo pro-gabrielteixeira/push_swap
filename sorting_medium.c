@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:36:25 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/08 23:33:22 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:11:39 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,100 +61,43 @@ int sorting_medium_b(stack** root_a, stack** root_b, stack** small_sort, int cou
     return (count);
 }
 
-// void swap_sorting(stack** root_a, stack** root_b)
-// {
-//     if ((*root_a)->next != NULL && (*root_b)->next->next != NULL)
-//     {
-//         if ((*root_a)->next->num < (*root_b)->next->next->num)
-//         {
-//             rule_shift_rr(root_a, root_b);
-//             rule_swap_b(root_b);
-//             rule_push_a(root_a, root_b);
-//             rule_swap_a(root_a);
-//             rule_reverse_rrr(root_a, root_b);
-//         }
-//     }
-    // if ((*root_a)->next != NULL && (*root_b)->next->next != NULL)
-    // {
-    //     if ((*root_a)->num < (*root_b)->next->next->num)
-    //     {
-    //         rule_shift_rr(root_a, root_b);
-    //         rule_swap_b(root_b);
-    //         rule_push_a(root_a, root_b);
-    //         rule_swap_a(root_a);
-    //         rule_reverse_rrr(root_a, root_b);
-    //         swap_sorting(root_a, root_b);
-    //     }
-    // }
-    // if ((*root_a)->next->next != NULL && (*root_b)->next != NULL)
-    // {
-    //     if ((*root_a)->next->next->num < (*root_b)->next->num)
-    //     {
-    //         rule_shift_a(root_a);
-    //         rule_swap_b(root_b);
-    //         rule_shift_a(root_a);
-    //         rule_push_a(root_a, root_b);
-    //         rule_swap_a(root_a);
-    //         rule_reverse_a(root_a);
-    //         rule_reverse_a(root_a);
-    //         swap_sorting(root_a, root_b);
-    //     }
-    // }
-// }
+int swap_sorting(stack** root)
+{
+    stack* curr;
+    int i;
+    int j;
+    
+    i = get_max(root);
+    j = 0;
+    curr = (*root);
+    while (curr->num != i)
+    {
+        j++;
+        curr = curr->next;
+    }
+    if (j > (get_size(root)/2))
+        return (FALSE);
+    else
+        return (TRUE);
+}
 
 void sorting_medium_a(stack** root_a, stack** root_b)
 {
-	while ((*root_b))
-	{
-        if ((*root_a)->next != NULL && (*root_b)->next != NULL)
+    while ((*root_b))
+    {
+        if ((*root_b)->num == get_max(root_b))
+            rule_push_a(root_a, root_b);
+        else if (swap_sorting(root_b))
         {
-            // if (((*root_a)->next != NULL && (*root_b)->next->next != NULL))
-            //     swap_sorting(root_a, root_b);
-            if (((*root_a)->num > (*root_a)->next->num) && ((*root_b)->num < (*root_b)->next->num))
-                rule_swap_ss(root_a, root_b);
-            else if ((*root_b)->num < (*root_b)->next->num)
-                rule_swap_b(root_b);
-            else if ((*root_a)->num > (*root_a)->next->num)
-                rule_swap_a(root_a);
-            else if ((*root_b)->next->next == NULL)
-                rule_push_a(root_a, root_b);
-            else if ((*root_a)->next->num < (*root_b)->next->next->num)
-            {
-                rule_shift_rr(root_a, root_b);
-                rule_swap_b(root_b);
-                rule_push_a(root_a, root_b);
-                rule_swap_a(root_a);
-                rule_reverse_rrr(root_a, root_b);
-            }
-            else if ((*root_a)->next->num < (*root_b)->next->num)
-            {
-                rule_shift_rr(root_a, root_b);
-                rule_push_a(root_a, root_b);
-                rule_swap_a(root_a);
-                rule_reverse_rrr(root_a, root_b);
-            }
-            else if ((*root_a)->next->num < (*root_b)->num)
-            {
-                rule_shift_a(root_a);
-                rule_push_a(root_a, root_b);
-                rule_swap_a(root_a);
-                rule_reverse_a(root_a);
-            }
-            else if ((*root_a)->num < (*root_b)->next->num)
-            {
-                rule_swap_b(root_b);
-                rule_push_a(root_a, root_b);
-                rule_swap_a(root_a);              
-            }
-            else if ((*root_a)->num < (*root_b)->num)
-            {
-                rule_push_a(root_a, root_b);
-                rule_swap_a(root_a);
-            }
-            else
-                rule_push_a(root_a, root_b);
+            while ((*root_b)->num != get_max(root_b))
+                rule_shift_b(root_b);
+            rule_push_a(root_a, root_b);
         }
         else
+        {
+            while ((*root_b)->num != get_max(root_b))
+                rule_reverse_b(root_b);
             rule_push_a(root_a, root_b);
+        }
     }
 }

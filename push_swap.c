@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:39 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/08 23:29:22 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:10:35 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void sort_medium(stack** root_a, stack** root_b, int size)
 	ft_get_small(&small_num, root_a, size);
 	count = 0;
 	i = get_size(&small_num);
-	ft_get_small(&small_sort, &small_num, 5);
-	while ((*root_a)->next != NULL && i && get_size(root_a) > 3)
+	ft_get_small(&small_sort, &small_num, size/2);
+	while ((*root_a) && i)
 	{
 		if(!(ft_check_small(&small_num, (*root_a)->num)))
 		{
@@ -58,13 +58,10 @@ void sort_medium(stack** root_a, stack** root_b, int size)
 		rule_reverse_b(root_b);
 	ft_dealloc(&small_num);
 	ft_dealloc(&small_sort);
-	if (get_size(root_a) > 3)
+	if (get_size(root_a) >= 1)
 		sort_medium(root_a, root_b, size);
 	else
-	{
-		sort_stack_small_a(root_a);
 		sorting_medium_a(root_a, root_b);
-	}
 }
 
 void sort_small(stack** root_a, stack** root_b, int size)
@@ -97,7 +94,13 @@ void init_sort(stack** root_a, stack** root_b)
 	if (i <= 3)
 		sort_stack_small_a(root_a);
 	else if (i <= 5)
-		sort_small(root_a, root_b, i); 
+		sort_small(root_a, root_b, i);
+	else if (i <= 20)
+		sort_medium(root_a, root_b, i/3);
+	else if (i <= 100)
+		sort_medium(root_a, root_b, i/4);
+	else if (i <= 250)
+		sort_medium(root_a, root_b, i/8); 
 	else
-		sort_medium(root_a, root_b, 10);
+		sort_medium(root_a, root_b, i/20);
 }
