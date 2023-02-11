@@ -6,22 +6,22 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:39 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/11 16:10:35 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:42:34 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void sort_large(stack** root_a, stack** root_b, int size)
+void	sort_large(stack **root_a, stack **root_b, int size)
 {
 	int	pivot;
 	int	count;
-	
+
 	count = 0;
 	pivot = ft_pivot(root_a);
 	while ((*root_a)->next != NULL && count < size)
 	{
-		if((*root_a)->num <= pivot)
+		if ((*root_a)->num <= pivot)
 			rule_push_b(root_a, root_b);
 		else if ((*root_a)->num > (*root_a)->next->num)
 			rule_swap_a(root_a);
@@ -31,10 +31,10 @@ void sort_large(stack** root_a, stack** root_b, int size)
 	}
 }
 
-void sort_medium(stack** root_a, stack** root_b, int size)
+void	sort_medium(stack **root_a, stack **root_b, int size)
 {
-	stack*	small_num;
-	stack*	small_sort;
+	stack	*small_num;
+	stack	*small_sort;
 	int		count;
 	int		i;
 
@@ -43,10 +43,10 @@ void sort_medium(stack** root_a, stack** root_b, int size)
 	ft_get_small(&small_num, root_a, size);
 	count = 0;
 	i = get_size(&small_num);
-	ft_get_small(&small_sort, &small_num, size/2);
+	ft_get_small(&small_sort, &small_num, size / 2);
 	while ((*root_a) && i)
 	{
-		if(!(ft_check_small(&small_num, (*root_a)->num)))
+		if (!(ft_check_small(&small_num, (*root_a)->num)))
 		{
 			count = sorting_medium_b(root_a, root_b, &small_sort, count);
 			i--;
@@ -64,14 +64,15 @@ void sort_medium(stack** root_a, stack** root_b, int size)
 		sorting_medium_a(root_a, root_b);
 }
 
-void sort_small(stack** root_a, stack** root_b, int size)
+void	sort_small(stack **root_a, stack **root_b, int size)
 {
-	int		count;
+	int	count;
 
 	count = 0;
-	while (count < (size/2))
+	while (count < (size / 2))
 	{
-		if ((*root_a)->num == get_max(root_a) || (*root_a)->num == get_min(root_a))
+		if ((*root_a)->num == get_max(root_a)
+			|| (*root_a)->num == get_min(root_a))
 		{
 			sort_stack_small_b(root_a, root_b);
 			count++;
@@ -86,7 +87,7 @@ void sort_small(stack** root_a, stack** root_b, int size)
 	}
 }
 
-void init_sort(stack** root_a, stack** root_b)
+void	init_sort(stack **root_a, stack **root_b)
 {
 	int	i;
 
@@ -95,12 +96,12 @@ void init_sort(stack** root_a, stack** root_b)
 		sort_stack_small_a(root_a);
 	else if (i <= 5)
 		sort_small(root_a, root_b, i);
-	else if (i <= 20)
-		sort_medium(root_a, root_b, i/3);
+	else if (i <= 50)
+		sort_medium(root_a, root_b, i / 3);
 	else if (i <= 100)
-		sort_medium(root_a, root_b, i/4);
+		sort_medium(root_a, root_b, i / 6);
 	else if (i <= 250)
-		sort_medium(root_a, root_b, i/8); 
+		sort_medium(root_a, root_b, i / 8);
 	else
-		sort_medium(root_a, root_b, i/20);
+		sort_medium(root_a, root_b, i / 10);
 }

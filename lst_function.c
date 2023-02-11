@@ -6,13 +6,13 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:02:38 by gateixei          #+#    #+#             */
-/*   Updated: 2022/12/29 13:24:45 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:35:26 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ft_dealloc(stack** root)
+void	ft_dealloc(stack **root)
 {
 	stack	*curr;
 	stack	*tmp;
@@ -26,21 +26,21 @@ void ft_dealloc(stack** root)
 	}
 }
 
-void ft_lstadd_front(stack** root, int value)
+void	ft_lstadd_front(stack **root, int value)
 {
-	stack*	new_lst;
-	
+	stack	*new_lst;
+
 	new_lst = malloc(sizeof(stack));
 	new_lst->num = value;
 	new_lst->next = *root;
 	(*root) = new_lst;
 }
 
-void ft_lstadd_back(stack** root, int value)
+void	ft_lstadd_back(stack **root, int value)
 {
-	stack* curr;
-	stack*	new_lst;
-	
+	stack	*curr;
+	stack	*new_lst;
+
 	new_lst = malloc(sizeof(stack));
 	new_lst->num = value;
 	new_lst->next = NULL;
@@ -55,9 +55,9 @@ void ft_lstadd_back(stack** root, int value)
 	curr->next = new_lst;
 }
 
-int lstlast(stack** root)
+int	lstlast(stack **root)
 {
-	stack* curr;
+	stack	*curr;
 
 	curr = *root;
 	while (curr->next != NULL)
