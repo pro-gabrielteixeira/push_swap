@@ -6,7 +6,7 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:10:42 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/11 17:58:35 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 19:26:56 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_iswhitespace(char c)
 	return ((c >= 9 && c <= 13) || c == 32);
 }
 
-int	ft_atoi(const char *str, stack **root_a)
+int	ft_atoi(const char *str, t_stack **root_a)
 {
 	long int	result;
 	int			neg;

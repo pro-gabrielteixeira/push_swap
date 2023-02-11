@@ -6,15 +6,15 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:08:38 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/11 17:32:23 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 19:27:59 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_validate_sequence(stack **root_a)
+int	ft_validate_sequence(t_stack **root_a)
 {
-	stack	*curr;
+	t_stack	*curr;
 
 	curr = (*root_a);
 	while (curr->next != NULL)
@@ -27,10 +27,10 @@ int	ft_validate_sequence(stack **root_a)
 	return (TRUE);
 }
 
-void	ft_validate_repeated_numbers(stack **root_a)
+void	ft_validate_repeated_numbers(t_stack **root_a)
 {
-	stack	*icurr;
-	stack	*jcurr;
+	t_stack	*icurr;
+	t_stack	*jcurr;
 
 	icurr = (*root_a);
 	while (icurr->next != NULL)
@@ -80,25 +80,25 @@ void	ft_validation_valide_char(int argc, char **argv)
 
 int	main(int argc, char *argv[])
 {
-	stack	*stack_a;
-	stack	*stack_b;
+	t_stack	*t_stack_a;
+	t_stack	*t_stack_b;
 	int		i;
 
 	i = 1;
-	stack_a = NULL;
-	stack_b = NULL;
+	t_stack_a = NULL;
+	t_stack_b = NULL;
 	if (argc < 2)
 		return (0);
 	ft_validation_valide_char(argc, argv);
 	while (argv[i] != NULL && i < argc)
 	{
-		ft_lstadd_back(&stack_a, ft_atoi(argv[i], &stack_a));
+		ft_lstadd_back(&t_stack_a, ft_atoi(argv[i], &t_stack_a));
 		i++;
 	}
-	ft_validate_repeated_numbers(&stack_a);
-	if (ft_validate_sequence(&stack_a))
+	ft_validate_repeated_numbers(&t_stack_a);
+	if (ft_validate_sequence(&t_stack_a))
 		return (0);
-	init_sort(&stack_a, &stack_b);
-	ft_dealloc(&stack_a);
+	init_sort(&t_stack_a, &t_stack_b);
+	ft_dealloc(&t_stack_a);
 	return (0);
 }

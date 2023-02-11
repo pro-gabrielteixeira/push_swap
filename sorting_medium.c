@@ -6,15 +6,15 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:36:25 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/11 18:10:10 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 19:29:50 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_check_small(stack **small, int i)
+int	ft_check_small(t_stack **small, int i)
 {
-	stack	*curr;
+	t_stack	*curr;
 
 	curr = (*small);
 	while (curr)
@@ -26,9 +26,9 @@ int	ft_check_small(stack **small, int i)
 	return (TRUE);
 }
 
-void	ft_get_small(stack **small, stack **root, int size)
+void	ft_get_small(t_stack **small, t_stack **root, int size)
 {
-	stack	*curr;
+	t_stack	*curr;
 	int		i;
 
 	while (size--)
@@ -45,8 +45,8 @@ void	ft_get_small(stack **small, stack **root, int size)
 	}
 }
 
-int	sorting_medium_b(stack **root_a, stack **root_b,
-	stack **small_sort, int count)
+int	sorting_medium_b(t_stack **root_a, t_stack **root_b,
+	t_stack **small_sort, int count)
 {
 	rule_push_b(root_a, root_b);
 	if ((ft_check_small(small_sort, (*root_b)->num)))
@@ -58,9 +58,9 @@ int	sorting_medium_b(stack **root_a, stack **root_b,
 	return (count);
 }
 
-int	swap_sorting(stack **root)
+int	swap_sorting(t_stack **root)
 {
-	stack	*curr;
+	t_stack	*curr;
 	int		i;
 	int		j;
 
@@ -78,7 +78,7 @@ int	swap_sorting(stack **root)
 		return (TRUE);
 }
 
-void	sorting_medium_a(stack **root_a, stack **root_b)
+void	sorting_medium_a(t_stack **root_a, t_stack **root_b)
 {
 	while ((*root_b))
 	{

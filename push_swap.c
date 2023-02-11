@@ -6,54 +6,44 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:04:39 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/11 17:42:34 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 19:28:12 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_large(stack **root_a, stack **root_b, int size)
+int	sorting_t_stack_a(t_stack **root_a, t_stack **root_b,
+	t_stack **small_num, t_stack **small_sort)
 {
-	int	pivot;
 	int	count;
+	int	i;
 
 	count = 0;
-	pivot = ft_pivot(root_a);
-	while ((*root_a)->next != NULL && count < size)
-	{
-		if ((*root_a)->num <= pivot)
-			rule_push_b(root_a, root_b);
-		else if ((*root_a)->num > (*root_a)->next->num)
-			rule_swap_a(root_a);
-		else
-			rule_reverse_a(root_a);
-		count++;
-	}
-}
-
-void	sort_medium(stack **root_a, stack **root_b, int size)
-{
-	stack	*small_num;
-	stack	*small_sort;
-	int		count;
-	int		i;
-
-	small_num = NULL;
-	small_sort = NULL;
-	ft_get_small(&small_num, root_a, size);
-	count = 0;
-	i = get_size(&small_num);
-	ft_get_small(&small_sort, &small_num, size / 2);
+	i = get_size(small_num);
 	while ((*root_a) && i)
 	{
-		if (!(ft_check_small(&small_num, (*root_a)->num)))
+		if (!(ft_check_small(small_num, (*root_a)->num)))
 		{
-			count = sorting_medium_b(root_a, root_b, &small_sort, count);
+			count = sorting_medium_b(root_a, root_b, small_sort, count);
 			i--;
 		}
 		else
 			rule_shift_a(root_a);
 	}
+	return (count);
+}
+
+void	sort_medium(t_stack **root_a, t_stack **root_b, int size)
+{
+	t_stack	*small_num;
+	t_stack	*small_sort;
+	int		count;
+
+	small_num = NULL;
+	small_sort = NULL;
+	ft_get_small(&small_num, root_a, size);
+	ft_get_small(&small_sort, &small_num, size / 2);
+	count = sorting_t_stack_a(root_a, root_b, &small_num, &small_sort);
 	while (count--)
 		rule_reverse_b(root_b);
 	ft_dealloc(&small_num);
@@ -64,7 +54,7 @@ void	sort_medium(stack **root_a, stack **root_b, int size)
 		sorting_medium_a(root_a, root_b);
 }
 
-void	sort_small(stack **root_a, stack **root_b, int size)
+void	sort_small(t_stack **root_a, t_stack **root_b, int size)
 {
 	int	count;
 
@@ -74,7 +64,7 @@ void	sort_small(stack **root_a, stack **root_b, int size)
 		if ((*root_a)->num == get_max(root_a)
 			|| (*root_a)->num == get_min(root_a))
 		{
-			sort_stack_small_b(root_a, root_b);
+			sort_t_stack_small_b(root_a, root_b);
 			count++;
 		}
 		else
@@ -83,17 +73,17 @@ void	sort_small(stack **root_a, stack **root_b, int size)
 	while ((*root_b) != NULL)
 	{
 		rule_push_a(root_a, root_b);
-		sort_stack_small_a(root_a);
+		sort_t_stack_small_a(root_a);
 	}
 }
 
-void	init_sort(stack **root_a, stack **root_b)
+void	init_sort(t_stack **root_a, t_stack **root_b)
 {
 	int	i;
 
 	i = get_size(root_a);
 	if (i <= 3)
-		sort_stack_small_a(root_a);
+		sort_t_stack_small_a(root_a);
 	else if (i <= 5)
 		sort_small(root_a, root_b, i);
 	else if (i <= 50)

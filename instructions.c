@@ -6,16 +6,16 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:13:00 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/11 18:45:45 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 19:27:31 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_element(stack	**root)
+void	swap_element(t_stack	**root)
 {
-	stack	*aux;
-	stack	*curr;
+	t_stack	*aux;
+	t_stack	*curr;
 
 	curr = *root;
 	aux = curr->next;
@@ -27,10 +27,10 @@ void	swap_element(stack	**root)
 	}
 }
 
-void	push_element(stack **root_add, stack **root_rm)
+void	push_element(t_stack **root_add, t_stack **root_rm)
 {
-	stack	*curr;
-	stack	*aux;
+	t_stack	*curr;
+	t_stack	*aux;
 
 	curr = *root_rm;
 	if (!curr)
@@ -50,9 +50,9 @@ void	push_element(stack **root_add, stack **root_rm)
 	}
 }
 
-void	shift_element(stack **root)
+void	shift_element(t_stack **root)
 {
-	stack	*curr;
+	t_stack	*curr;
 
 	curr = *root;
 	if (curr->next != NULL)
@@ -65,10 +65,10 @@ void	shift_element(stack **root)
 	}
 }
 
-void	reverse_shift(stack **root)
+void	reverse_shift(t_stack **root)
 {
-	stack	*curr;
-	stack	*aux;	
+	t_stack	*curr;
+	t_stack	*aux;	
 
 	curr = *root;
 	while (curr->next != NULL)

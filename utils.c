@@ -6,15 +6,15 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 00:47:43 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/11 18:56:47 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 19:32:27 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_min(stack **root)
+int	get_min(t_stack **root)
 {
-	stack	*curr;
+	t_stack	*curr;
 	int		i;	
 
 	curr = (*root);
@@ -28,9 +28,9 @@ int	get_min(stack **root)
 	return (i);
 }
 
-int	get_max(stack **root)
+int	get_max(t_stack **root)
 {
-	stack	*curr;
+	t_stack	*curr;
 	int		i;	
 
 	curr = *root;
@@ -50,11 +50,11 @@ void	ft_print_error(void)
 	exit(1);
 }
 
-int	ft_pivot(stack **root)
+int	ft_pivot(t_stack **root)
 {
 	long int		result;
 	unsigned int	i;
-	stack			*curr;
+	t_stack			*curr;
 
 	i = 0;
 	result = 0;
@@ -68,9 +68,9 @@ int	ft_pivot(stack **root)
 	return ((int)result / i);
 }
 
-int	get_size(stack **root)
+int	get_size(t_stack **root)
 {
-	stack	*curr;
+	t_stack	*curr;
 	int		i;
 
 	i = 0;

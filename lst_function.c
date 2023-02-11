@@ -6,16 +6,16 @@
 /*   By: gateixei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:02:38 by gateixei          #+#    #+#             */
-/*   Updated: 2023/02/11 17:35:26 by gateixei         ###   ########.fr       */
+/*   Updated: 2023/02/11 19:27:44 by gateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_dealloc(stack **root)
+void	ft_dealloc(t_stack **root)
 {
-	stack	*curr;
-	stack	*tmp;
+	t_stack	*curr;
+	t_stack	*tmp;
 
 	curr = (*root);
 	while (curr != NULL)
@@ -26,22 +26,22 @@ void	ft_dealloc(stack **root)
 	}
 }
 
-void	ft_lstadd_front(stack **root, int value)
+void	ft_lstadd_front(t_stack **root, int value)
 {
-	stack	*new_lst;
+	t_stack	*new_lst;
 
-	new_lst = malloc(sizeof(stack));
+	new_lst = malloc(sizeof(t_stack));
 	new_lst->num = value;
 	new_lst->next = *root;
 	(*root) = new_lst;
 }
 
-void	ft_lstadd_back(stack **root, int value)
+void	ft_lstadd_back(t_stack **root, int value)
 {
-	stack	*curr;
-	stack	*new_lst;
+	t_stack	*curr;
+	t_stack	*new_lst;
 
-	new_lst = malloc(sizeof(stack));
+	new_lst = malloc(sizeof(t_stack));
 	new_lst->num = value;
 	new_lst->next = NULL;
 	curr = *root;
@@ -55,9 +55,9 @@ void	ft_lstadd_back(stack **root, int value)
 	curr->next = new_lst;
 }
 
-int	lstlast(stack **root)
+int	lstlast(t_stack **root)
 {
-	stack	*curr;
+	t_stack	*curr;
 
 	curr = *root;
 	while (curr->next != NULL)
